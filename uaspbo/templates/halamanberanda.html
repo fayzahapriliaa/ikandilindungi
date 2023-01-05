@@ -1,0 +1,60 @@
+{% extends 'base.html' %} {% load static %} {% block content %} <br /><br />
+<div class="container">
+  <h1>Tabel Ikan Dilindungi</h1>
+  <br />
+  <ul>
+    {% for ikan in ikans %} {%endfor%}
+  </ul>
+  <table class="table">
+    <thead style="text-align: center">
+      <center>
+        <tr>
+          <th scope="col">NAMA</th>
+          <th scope="col">NAMA ILMIAH</th>
+          <th scope="col">FOTO</th>
+          <th scope="col">KELOMPOK</th>
+          <th scope="col">DETAIL</th>
+          <th scope="col">AKSI</th>
+        </tr>
+      </center>
+    </thead>
+    <tbody style="text-align: center">
+      {% for ikan in ikans %}
+      <tr>
+        <td>{{ikan.nama}}</td>
+        <td><i>{{ikan.nama_ilmiah}}</i></td>
+        <td><img src="{% static ikan.img %}" width="100px" alt="" /></td>
+        <td>{{ikan.kelompok_id}}</td>
+        <td>
+          <a href="{{ikan.detail}}" class="btn btn-sm btn-primary">Detail Klik disini</a>
+        </td>
+        <td>
+          <a href="{% url 'update_data' ikan.id %}" class="btn btn-sm btn-warning">Edit</a>
+          <a href="#" class="btn btn-sm btn-danger" onclick="hapus_data('{{ikan.id}}')">Hapus</a>
+        </td>
+      </tr>
+      {%endfor%}
+    </tbody>
+  </table>
+  <script>
+    function hapus_data(id_ikan) {
+      swal({
+        title: "Apakah Anda yakin?",
+        text: "setelah dihapus, maka anda tidak bisa mengembalikan file lagi!",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+      }).then(willDelete => {
+        if (willDelete) {
+          swal("Berhasil", "Data berhasil dihapus!", "success").then(function () {
+            window.location = "/halamanberanda/delete_data/" + id_ikan
+          })
+        }
+      })
+    }
+  </script>
+</div>
+<center>
+  <a href="/tambah_data/" class="btn btn-sm btn-success">Tambah Data</a>
+</center>
+{% endblock %}

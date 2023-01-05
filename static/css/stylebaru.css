@@ -1,0 +1,8 @@
+i {
+  text-decoration: underline;
+  color: blue;
+}
+a .nav-link:hover {
+  color: white;
+  background-color: aqua;
+}

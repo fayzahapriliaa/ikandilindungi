@@ -1,0 +1,17 @@
+{% extends 'base.html' %} {% load static %} {% block content %} <br />
+<div class="container">
+  <h1>Tambah Data Ikan</h1>
+  <div class="row">
+    <div class="col-md-6">
+      {% if pesan %}
+      <div class="alert alert-success">{{pesan}}</div>
+      {% endif%}
+      <form action="{% url 'update_data' ikan.id %}" method="post">
+        {% csrf_token %} {{form.as_p}}
+        <input type="submit" value="Simpan" class="btn btn-sm btn-primary" />
+        <a href="/halamanberanda" class="btn btn-sm btn-danger">Kembali</a>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}
